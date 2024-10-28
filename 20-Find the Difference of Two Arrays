@@ -1,0 +1,46 @@
+class Solution {
+
+    // This method finds the difference between two integer arrays.
+    // It returns a list of lists where the first list contains elements unique to nums1
+    // and the second list contains elements unique to nums2.
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        // Convert both arrays to sets to remove duplicates and allow for O(1) lookups.
+        Set<Integer> set1 = convertToSet(nums1);
+        Set<Integer> set2 = convertToSet(nums2);
+
+        // Initialize the answer list that will contain two lists.
+        List<List<Integer>> answer = new ArrayList<>();
+        List<Integer> uniqueToNums1 = new ArrayList<>();
+        List<Integer> uniqueToNums2 = new ArrayList<>();
+
+        // Iterate over set1 and add elements not in set2 to uniqueToNums1.
+        for (int value : set1) {
+            if (!set2.contains(value)) {
+                uniqueToNums1.add(value);
+            }
+        }
+
+        // Iterate over set2 and add elements not in set1 to uniqueToNums2.
+        for (int value : set2) {
+            if (!set1.contains(value)) {
+                uniqueToNums2.add(value);
+            }
+        }
+
+        // Add both lists to the answer list.
+        answer.add(uniqueToNums1);
+        answer.add(uniqueToNums2);
+      
+        // Return the final list of lists containing unique elements.
+        return answer;
+    }
+
+    // This method converts an integer array to a set to remove duplicates.
+    private Set<Integer> convertToSet(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int value : nums) {
+            set.add(value);
+        }
+        return set;
+    }
+}
